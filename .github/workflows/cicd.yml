@@ -18,16 +18,17 @@ env:
   CONTAINER_NAME: nginx
 
 jobs:
-
-  deploy:
+  build-and-deploy:
     name: Build, Push and Deploy
     runs-on: ubuntu-latest
 
     steps:
 
+      # 1. Checkout source code
       - name: Checkout Code
         uses: actions/checkout@v4
 
+      # 2. Authenticate GitHub Actions with AWS
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v6.2.4
         with:
@@ -35,21 +36,25 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
           audience: sts.amazonaws.com
 
+      # 3. Login to Amazon ECR
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
 
+      # 4. Build Docker image
       - name: Build Docker Image
         run: |
           docker build \
             -t ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:${{ github.sha }} \
             .
 
+      # 5. Push Docker image to ECR
       - name: Push Docker Image to ECR
         run: |
           docker push \
             ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:${{ github.sha }}
 
+      # 6. Get current ECS task definition
       - name: Get Current ECS Task Definition
         run: |
           aws ecs describe-task-definition \
@@ -59,7 +64,8 @@ jobs:
             --output json \
             --no-cli-pager > task-definition.json
 
-      - name: Update Image in Task Definition
+      # 7. Replace old image with new ECR image
+      - name: Update ECS Task Definition
         id: task-def
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
@@ -67,10 +73,21 @@ jobs:
           container-name: ${{ env.CONTAINER_NAME }}
           image: ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:${{ github.sha }}
 
-      - name: Deploy to ECS
+      # 8. Deploy new task definition to ECS
+      - name: Deploy New Version to ECS
         uses: aws-actions/amazon-ecs-deploy-task-definition@v2
         with:
           task-definition: ${{ steps.task-def.outputs.task-definition }}
           service: ${{ env.ECS_SERVICE }}
           cluster: ${{ env.ECS_CLUSTER }}
           wait-for-service-stability: true
+
+      # 9. Verify ECS deployment
+      - name: Verify ECS Deployment
+        run: |
+          aws ecs describe-services \
+            --cluster ${{ env.ECS_CLUSTER }} \
+            --services ${{ env.ECS_SERVICE }} \
+            --region ${{ env.AWS_REGION }} \
+            --query 'services[0].{Status:status,Running:runningCount,Desired:desiredCount,TaskDefinition:taskDefinition}' \
+            --output table
