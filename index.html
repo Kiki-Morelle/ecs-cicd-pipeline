@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Resume</title>
+    <style>
+        :root {
+            --primary: #1e293b;
+            --secondary: #0f766e;
+            --text: #334155;
+            --text-light: #64748b;
+            --background: #ffffff;
+            --accent: #f8fafc;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: var(--text);
+            background-color: var(--background);
+            line-height: 1.4;
+            font-size: 14px;
+            padding: 30px;
+        }
+
+        .resume-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        header {
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 12px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .header-left h1 {
+            font-size: 28px;
+            color: var(--primary);
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .header-left h2 {
+            font-size: 16px;
+            color: var(--secondary);
+            font-weight: 600;
+            margin-top: 2px;
+        }
+
+        .header-right {
+            text-align: right;
+            font-size: 12px;
+            color: var(--text-light);
+        }
+
+        .header-right a {
+            color: var(--text-light);
+            text-decoration: none;
+        }
+
+        .header-right a:hover {
+            text-decoration: underline;
+        }
+
+        section {
+            margin-bottom: 15px;
+        }
+
+        h3.section-title {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--secondary);
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 4px;
+            margin-bottom: 8px;
+        }
+
+        .summary-text {
+            text-align: justify;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 6px 20px;
+            background-color: var(--accent);
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        .skill-category strong {
+            color: var(--primary);
+        }
+
+        .job {
+            margin-bottom: 12px;
+        }
+
+        .job:last-child {
+            margin-bottom: 0;
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 3px;
+        }
+
+        .job-company {
+            color: var(--secondary);
+        }
+
+        ul {
+            list-style-type: square;
+            margin-left: 18px;
+            color: var(--text);
+        }
+
+        li {
+            margin-bottom: 3px;
+        }
+
+        li:last-child {
+            margin-bottom: 0;
+        }
+
+        .education-cert-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media print {
+            body {
+                padding: 0;
+                font-size: 13px;
+            }
+            .resume-container {
+                max-width: 100%;
+            }
+            header { margin-bottom: 10px; }
+            section { margin-bottom: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="resume-container">
+        
+        <header>
+            <div class="header-left">
+                <h1>Kiki Morelle</h1>
+                <h2>Senior DevOps & Cloud Engineer</h2>
+            </div>
+            <div class="header-right">
+                <div>📧 kiki.morelle@email.com | 📱 (555) 019-2834</div>
+                <div>🌐 ://linkedin.com | 💻 ://github.com</div>
+                <div>📍 Austin, TX (Open to Remote)</div>
+            </div>
+        </header>
+
+        <section id="professional-summary">
+            <h3 class="section-title">Professional Summary</h3>
+            <p class="summary-text">
+                Results-driven **DevOps and Cloud Engineer** with **6 years of progressive experience** automating, scaling, and securing cloud infrastructure. Proven track record in orchestrating multi-region AWS environments, migrating legacy architectures to **Kubernetes (EKS)**, and accelerating delivery speeds by implementing robust **GitOps (ArgoCD)** pipelines. Adept at driving **Infrastructure as Code (IaC)** parity via Terraform and reducing cloud spend while maintaining high availability, fault tolerance, and tight security postures.
+            </p>
+        </section>
+
+        <section id="skills">
+            <h3 class="section-title">Technical Skills</h3>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <strong>Cloud Platforms:</strong> AWS (EC2, EKS, RDS, S3, IAM, Route53, VPC)
+                </div>
+                <div class="skill-category">
+                    <strong>Containers & Orchestration:</strong> Kubernetes, Docker, Helm, ECS
+                </div>
+                <div class="skill-category">
+                    <strong>Infrastructure as Code:</strong> Terraform, Ansible, CloudFormation
+                </div>
+                <div class="skill-category">
+                    <strong>CI/CD & GitOps:</strong> Jenkins, GitHub Actions, GitLab CI, ArgoCD
+                </div>
+                <div class="skill-category">
+                    <strong>Monitoring & Logging:</strong> Prometheus, Grafana, ELK Stack, Datadog
+                </div>
+                <div class="skill-category">
+                    <strong>Scripting & Code:</strong> Python, Bash, Go, Shell Scripting
+                </div>
+            </div>
+        </section>
+
+        <section id="experience">
+            <h3 class="section-title">Professional Experience</h3>
+            
+            <div class="job">
+                <div class="job-header">
+                    <div>Senior DevOps Engineer | <span class="job-company">CloudScale Technologies</span></div>
+                    <div>2023 – Present</div>
+                </div>
+                <ul>
+                    <li>Designed and maintained production-grade **AWS EKS** infrastructure handling over 5M daily active API requests.</li>
+                    <li>Migrated **40+ microservices** from manual EC2 deployments to declarative **GitOps workflows using ArgoCD**, accelerating deployment frequency by 60%.</li>
+                    <li>Authored modular **Terraform scripts** to guarantee repeatable development, staging, and production ecosystem parity, decreasing onboarding environment provisioning from days to 15 minutes.</li>
+                    <li>Engineered automated fallback strategies and cost-optimization policies via AWS Auto Scaling and Spot Instances, yielding a **32% drop in monthly infrastructure costs**.</li>
+                </ul>
+            </div>
+
+            <div class="job">
+                <div class="job-header">
+                    <div>DevOps Engineer | <span class="job-company">Nexus Digital Solutions</span></div>
+                    <div>2021 – 2023</div>
+                </div>
+                <ul>
+                    <li>Constructed end-to-end **CI/CD pipelines via GitHub Actions** for automated testing, Docker containerization, and blue-green deployments.</li>
+                    <li>Centralized enterprise observability by introducing **Prometheus and Grafana** dashboards, reducing Mean Time to Resolution (MTTR) by 45%.</li>
+                    <li>Enforced strict **IAM role-based access control (RBAC)** across multi-account AWS organizations to conform to SOC2 compliance guidelines.</li>
+                </ul>
+            </div>
+
+            <div class="job">
+                <div class="job-header">
+                    <div>Cloud & Systems Administrator | <span class="job-company">Apex Web Systems</span></div>
+                    <div>2020 – 2021</div>
+                </div>
+                <ul>
+                    <li>Managed internal Linux infrastructure servers, patching security vulnerabilities and maintaining **99.9% application uptime**.</li>
+                    <li>Transitioned configuration workflows to **Ansible playbooks**, automating system patch management across 120 bare-metal and virtual instances.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="education-certs">
+            <div class="education-cert-grid">
+                <div>
+                    <h3 class="section-title">Education</h3>
+                    <div class="job-header">
+                        <div>B.S. in Computer Science</div>
+                        <div>Graduated 2020</div>
+                    </div>
+                    <div style="color: var(--text-light);">University of Texas at Austin</div>
+                </div>
+                <div>
+                    <h3 class="section-title">Certifications</h3>
+                    <ul>
+                        <li>AWS Certified Solutions Architect – Professional</li>
+                        <li>Certified Kubernetes Administrator (CKA)</li>
+                        <li>HashiCorp Certified: Terraform Associate</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+</body>
+</html>
